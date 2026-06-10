@@ -38,4 +38,11 @@ public class Calculator {
     public void setResults(List<Integer> results) {
         this.results = results;
     }
+
+    public void removeResult() {
+        if (results.isEmpty()) {
+            throw new IllegalStateException("삭제할 연산 결과가 없습니다.");
+        }
+        this.results.remove(0);
+    }
 }
