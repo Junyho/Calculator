@@ -28,18 +28,23 @@ public class App {
                 case '/':
                     if (num2 == 0) {
                         System.out.println("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
-                    } else {
-                        result = num1 / num2;
+                        continue;
                     }
+                    result = num1 / num2;
                     break;
                 default:
                     System.out.println("+,-,*,/ 만 입력 가능합니다");
+                    continue;
             }
             System.out.println("결과: " + result);
 
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             String command = sc.next();
-            if (command.equals("exit")) break;
+
+            if (command.equals("exit")) {
+                System.out.println("프로그램을 종료합니다.");
+                break;
+            }
         }
 
     }
