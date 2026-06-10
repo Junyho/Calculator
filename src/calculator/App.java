@@ -1,6 +1,6 @@
 package calculator;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
@@ -36,14 +36,16 @@ public class App {
             System.out.println(calculator.getResults());
 
 
-            System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
+            System.out.println("더 계산하시겠습니까? (exit 입력 시 종료, clear 입력 시 히스토리 초기화)");
             String command = sc.next();
 
-            if (command.equals("exit")) {
+            if (command.equalsIgnoreCase("clear")) {
+                calculator.setResults(new ArrayList<>());
+                System.out.println("계산 히스토리를 초기화했습니다.");
+            } else if (command.equalsIgnoreCase("exit")) {
                 System.out.println("프로그램을 종료합니다.");
                 break;
             }
         }
-
     }
 }
