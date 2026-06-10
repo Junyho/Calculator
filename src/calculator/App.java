@@ -19,9 +19,14 @@ public class App {
             System.out.print("사칙연산 기호를 입력하세요: ");
             char operator = sc.next().charAt(0);
 
-            int result = calculator.calculate(num1, num2, operator);
-            System.out.println("결과: " + result);
-            System.out.println("계산 히스토리: " + calculator.getResults());
+            try {
+                int result = calculator.calculate(num1, num2, operator);
+                System.out.println("결과: " + result);
+                System.out.println("계산 히스토리: " + calculator.getResults());
+            } catch (ArithmeticException | IllegalArgumentException e){
+                System.out.println(e.getMessage());
+                continue;
+            }
 
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             String command = sc.next();
