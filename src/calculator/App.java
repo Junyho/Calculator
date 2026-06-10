@@ -1,11 +1,13 @@
 package calculator;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        Calculator calculator = new Calculator();
 
         while (true) {
 
@@ -17,26 +19,9 @@ public class App {
             System.out.print("사칙연산 기호를 입력하세요: ");
             char operator = sc.next().charAt(0);
 
-            int result = 0;
-            switch (operator) {
-                case '+': result = num1 + num2;
-                    break;
-                case '-': result = num1 - num2;
-                    break;
-                case '*': result = num1 * num2;
-                    break;
-                case '/':
-                    if (num2 == 0) {
-                        System.out.println("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
-                        continue;
-                    }
-                    result = num1 / num2;
-                    break;
-                default:
-                    System.out.println("+,-,*,/ 만 입력 가능합니다");
-                    continue;
-            }
+            int result = calculator.calculate(num1, num2, operator);
             System.out.println("결과: " + result);
+            System.out.println("계산 히스토리: " + calculator.getResults());
 
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             String command = sc.next();
