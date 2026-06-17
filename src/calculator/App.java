@@ -7,45 +7,39 @@ public class App {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        Calculator calculator = new Calculator();
+        ArithmeticCalculator calculator = new ArithmeticCalculator();
+        String exit = "";
 
-        while (true) {
+        while (!(exit.equals("exit"))) {
 
             System.out.print("첫 번째 숫자를 입력하세요: ");
-            int num1 = sc.nextInt();
+            String input1 = sc.next();
+            Number num1 = input1.contains(".") ? Double.parseDouble(input1) : Integer.parseInt(input1);
+
             System.out.print("두 번째 숫자를 입력하세요: ");
-            int num2 = sc.nextInt();
+            String input2 = sc.next();
+            Number num2 = input2.contains(".") ? Double.parseDouble(input2) : Integer.parseInt(input2);
 
             System.out.print("사칙연산 기호를 입력하세요: ");
             char operator = sc.next().charAt(0);
+            OperatorType operatorType = OperatorType.from(operator);
 
-            try {
-                int result = calculator.calculate(num1, num2, operator);
-                System.out.println("결과: " + result);
-                System.out.println("계산 히스토리: " + calculator.getResults());
-            } catch (ArithmeticException | IllegalArgumentException e){
-                System.out.println(e.getMessage());
-                continue;
-            }
+            double result = calculator.calculate(num1, num2, operatorType);
+            System.out.println("결과: " + result);
+            System.out.println("계산 히스토리: " + calculator.getResults());
 
             System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (Y 입력 시 삭제)");
             String flag = sc.next();
             if (flag.equalsIgnoreCase("Y")) {
                 calculator.removeResult();
+                System.out.println("삭제 후 히스토리: " + calculator.getResults());
             }
-            System.out.println(calculator.getResults());
 
-
-            System.out.println("더 계산하시겠습니까? (exit 입력 시 종료, clear 입력 시 히스토리 초기화)");
-            String command = sc.next();
-
-            if (command.equalsIgnoreCase("clear")) {
-                calculator.setResults(new ArrayList<>());
-                System.out.println("계산 히스토리를 초기화했습니다.");
-            } else if (command.equalsIgnoreCase("exit")) {
-                System.out.println("프로그램을 종료합니다.");
-                break;
-            }
+            System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
+            exit = sc.next();
         }
+
+        System.out.println("계산기를 종료합니다");
+        sc.close();
     }
 }
