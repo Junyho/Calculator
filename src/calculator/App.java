@@ -35,6 +35,14 @@ public class App {
                 System.out.println("삭제 후 히스토리: " + calculator.getResults());
             }
 
+            System.out.println("특정 값보다 큰 결과를 조회하시겠습니까? (yes), 아니면 아무 값 입력: ");
+            String query = sc.next();
+            if (query.equals("yes")){
+                System.out.print("기준 값을 입력하세요: ");
+                double threshold = sc.nextDouble();
+                System.out.println("기준보다 큰 결과들: " + calculator.getResultsGreaterThan(threshold));
+            }
+
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             exit = sc.next();
         }

@@ -2,6 +2,7 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ArithmeticCalculator {
 
@@ -20,6 +21,12 @@ public class ArithmeticCalculator {
 
     public void removeResult() {
         results.remove(0);
+    }
+
+    public List<Double> getResultsGreaterThan(double threshold) {
+        return results.stream()
+                .filter(v -> v > threshold)
+                .collect(Collectors.toList());
     }
 
 }
