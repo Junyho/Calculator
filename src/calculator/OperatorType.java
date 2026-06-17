@@ -40,5 +40,11 @@ public enum OperatorType {
 
     public abstract double operate(double num1, double num2);
 
+    public static OperatorType from(char operator) {
+        for (OperatorType op : values()) {
+            if (operator == op.type) return op;
+        }
+        throw new IllegalArgumentException("지원하지 않는 연산자 입니다: " + operator);
+    }
 
 }
